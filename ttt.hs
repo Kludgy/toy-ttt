@@ -22,8 +22,8 @@ go pss p = do
 readMove :: [Int] -> IO Int
 readMove opts = do
   k <- getChar
-  let i = ord k
-  if i < ord '1' || i > ord '9' || not (i `elem` opts)
+  let i = ord k - ord '1' + 1
+  if i < 1 || i > 9 || not (i `elem` opts)
     then putStrLn "bzzt bad key" >> readMove opts
     else pure i
          
