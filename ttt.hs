@@ -73,4 +73,4 @@ row n = (!! n)
 type Run = [[Pip]] -> [Pip]
 
 runs :: [Run]
-runs = [diag, diag . transp] ++ map row [0..2] ++ map (\n -> row n . transp) [0..2]
+runs = [diag, diag . mirr] ++ map row [0..2] ++ map (\n -> row n . transp) [0..2]
