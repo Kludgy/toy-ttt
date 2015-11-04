@@ -35,7 +35,9 @@ labels :: [[Int]]
 labels = [[1,2,3], [4,5,6], [7,8,9]]
 
 write :: (Int -> Maybe a) -> [[a]] -> [[a]]
-write f xss = _ -- Whoops forgot to implement
+write f xss = zipWith (zipWith (\l x -> case f l of
+                                          Just x' -> x'
+                                          Nothing -> x )) labels xss
 
 draw :: [[Pip]] -> IO ()
 draw pss = mapM_ putStrLn (map (map pipChar) pss)
