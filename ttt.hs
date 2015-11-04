@@ -1,3 +1,4 @@
+import Control.Monad (when)
 import Data.Char (ord)
 
 main :: IO ()
@@ -22,6 +23,7 @@ go pss p = do
 readMove :: [Int] -> IO Int
 readMove opts = do
   k <- getChar
+  when (k == 'q') (error "user quit")
   let i = ord k - ord '1' + 1
   if i < 1 || i > 9 || not (i `elem` opts)
     then putStrLn "bzzt bad key" >> readMove opts
