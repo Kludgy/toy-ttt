@@ -1,8 +1,10 @@
 import Control.Monad (when)
 import Data.Char (ord)
+import System.IO (hSetBuffering, stdin, BufferMode(NoBuffering))
 
 main :: IO ()
 main = do
+  hSetBuffering stdin NoBuffering
   let empty = replicate 3 (replicate 3 Z)
   go empty X
 
@@ -26,7 +28,7 @@ readMove opts = do
   when (k == 'q') (error "user quit")
   let i = ord k - ord '1' + 1
   if i < 1 || i > 9 || not (i `elem` opts)
-    then putStrLn "bzzt bad key" >> readMove opts
+    then readMove opts
     else pure i
          
 nextPlayer :: Pip -> Pip
